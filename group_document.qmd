@@ -42,4 +42,10 @@ Hallo
 5+5
 ```
 
-why is this not working
+#### New feature
+
+some stuff
+
+```{r}
+10*10
+```
