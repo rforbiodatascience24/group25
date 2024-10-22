@@ -49,7 +49,7 @@ PCA_eigenvalues <- PCA_dataset %>%
 By plotting the eigenvalues, we can visualize the variance explained.
 
 ```{r}
-PCA_eigenvalues %>%
+PCA_eigenvalues |>
   ggplot(aes(PC, percent)) + 
   geom_col(fill = "purple", alpha = 0.6) +
   scale_x_continuous(breaks = 1:9) +
@@ -61,8 +61,7 @@ PCA_eigenvalues %>%
 
 Based on the plot, the first principal component explains over 60 % of the variance.
 
-HEAD
-We will now add a new binary variable where if the outcome is benign = 0 and if it is malignant = 1
+HEAD We will now add a new binary variable where if the outcome is benign = 0 and if it is malignant = 1
 
 ```{r}
 Biopsy_Data_with_PCAcomponents <- Biopsy_Data_with_PCAcomponents |> 
@@ -85,12 +84,10 @@ Creating scatter plot of the two first fitted PCA columns.
 
 ```{r}
 Biopsy_Data_with_PCAcomponents |>
-  select(.fittedPC1, .fittedPC2, outcome) |>  
-  ggplot(aes(x = .fittedPC1, 
-             y = .fittedPC2, 
-             color = outcome)) +  
-  geom_point() + 
+  select(.fittedPC1, .fittedPC2, outcome) |>
+  ggplot(aes(x = .fittedPC1, y = .fittedPC2,
+             color = outcome)) +
+  geom_point() +
   ggtitle('Scatter plot of PCA 1 and PCA 2') +
-  scale_color_manual(
-    values = c(malignant = "purple", benign = "darkblue"))  # Correct closing parenthesis
-
+  scale_color_manual( values = c(malignant = "purple", benign = "darkblue")) # Correct closing parenthesis
+```
