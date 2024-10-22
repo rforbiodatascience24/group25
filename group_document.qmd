@@ -11,7 +11,7 @@ editor: visual
 First we load the data and the necessary libraries to perform a PCA
 
 ```{r}
-#| warning: false
+
 library(tidyverse)
 library(broom)  # devtools::install_github("tidymodels/broom")
 library(cowplot)
@@ -26,6 +26,8 @@ PCA_dataset <- biopsy |>
   select(-outcome) |> 
   prcomp(scale = TRUE)
 ```
+
+The dataset below consists of all the features present in the biopsy dataset along with all the principal components
 
 ```{r}
 Biopsy_Data_with_PCAcomponents <- PCA_dataset |> 
@@ -58,3 +60,37 @@ PCA_eigenvalues %>%
 ```
 
 Based on the plot, the first principal component explains over 60 % of the variance.
+
+HEAD
+We will now add a new binary variable where if the outcome is benign = 0 and if it is malignant = 1
+
+```{r}
+Biopsy_Data_with_PCAcomponents <- Biopsy_Data_with_PCAcomponents |> 
+  mutate(binary_outcome = case_when(
+    outcome == "benign"~0,
+    outcome == "malignant"~1
+  ))
+```
+
+```{r}
+Biopsy_Data_with_PCAcomponents |> 
+  ggplot(aes(.fittedPC1, binary_outcome )) + 
+  geom_point() + 
+  theme_minimal()
+```
+
+## Data Analysis
+
+Creating scatter plot of the two first fitted PCA columns.
+
+```{r}
+Biopsy_Data_with_PCAcomponents |>
+  select(.fittedPC1, .fittedPC2, outcome) |>  
+  ggplot(aes(x = .fittedPC1, 
+             y = .fittedPC2, 
+             color = outcome)) +  
+  geom_point() + 
+  ggtitle('Scatter plot of PCA 1 and PCA 2') +
+  scale_color_manual(
+    values = c(malignant = "purple", benign = "darkblue"))  # Correct closing parenthesis
+
