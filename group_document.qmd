@@ -8,10 +8,29 @@ editor: visual
 
 ## Load and Clean Data
 
+First we load the data and the necessary libraries to perform a PCA
+
 ```{r}
+#| warning: false
 library(tidyverse)
+library(broom)  # devtools::install_github("tidymodels/broom")
+library(cowplot)
 
 biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 ```
+From the biopsy data set we can create a new data set that is appropriate to perform PCA analysis:
+```{r}
+PCA_dataset <- biopsy |> 
+  select(-outcome) |> 
+  prcomp(scale = TRUE)
+```
+
+```{r}
+Biopsy_Data_with_PCAcomponents <- PCA_dataset |> 
+  augment(biopsy) 
+  
+```
+
+
 
 ## Data Analysis
