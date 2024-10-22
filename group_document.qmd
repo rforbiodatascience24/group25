@@ -35,7 +35,33 @@ Biopsy_Data_with_PCAcomponents <- PCA_dataset |>
   
 ```
 
-<<<<<<< HEAD
+## Data Analysis
+
+## Variance explained
+
+In this step we find the eigenvalues from the PCA, and use function tidy to convert this object into a tidy data frame. Each eigenvalue represents the variance explained by each principal component in the PCA.
+
+```{r}
+PCA_eigenvalues <- PCA_dataset %>%
+  tidy(matrix = "eigenvalues")
+```
+
+By plotting the eigenvalues, we can visualize the variance explained.
+
+```{r}
+PCA_eigenvalues %>%
+  ggplot(aes(PC, percent)) + 
+  geom_col(fill = "purple", alpha = 0.6) +
+  scale_x_continuous(breaks = 1:9) +
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.1))) +
+  ggtitle("Variance explained by each principal component")
+```
+
+Based on the plot, the first principal component explains over 60 % of the variance.
+
+HEAD
 We will now add a new binary variable where if the outcome is benign = 0 and if it is malignant = 1
 
 ```{r}
@@ -52,7 +78,7 @@ Biopsy_Data_with_PCAcomponents |>
   geom_point() + 
   theme_minimal()
 ```
-=======
+
 ## Data Analysis
 
 Creating scatter plot of the two first fitted PCA columns.
@@ -67,6 +93,4 @@ Biopsy_Data_with_PCAcomponents |>
   ggtitle('Scatter plot of PCA 1 and PCA 2') +
   scale_color_manual(
     values = c(malignant = "purple", benign = "darkblue"))  # Correct closing parenthesis
->>>>>>> 024363e62c5c9a11166cb33b482d17a3172a9e81
 
-```
