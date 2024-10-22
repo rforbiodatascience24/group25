@@ -18,7 +18,9 @@ library(cowplot)
 
 biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 ```
+
 From the biopsy data set we can create a new data set that is appropriate to perform PCA analysis:
+
 ```{r}
 PCA_dataset <- biopsy |> 
   select(-outcome) |> 
@@ -31,6 +33,28 @@ Biopsy_Data_with_PCAcomponents <- PCA_dataset |>
   
 ```
 
-
-
 ## Data Analysis
+
+## Variance explained
+
+In this step we find the eigenvalues from the PCA, and use function tidy to convert this object into a tidy data frame. Each eigenvalue represents the variance explained by each principal component in the PCA.
+
+```{r}
+PCA_eigenvalues <- PCA_dataset %>%
+  tidy(matrix = "eigenvalues")
+```
+
+By plotting the eigenvalues, we can visualize the variance explained.
+
+```{r}
+PCA_eigenvalues %>%
+  ggplot(aes(PC, percent)) + 
+  geom_col(fill = "purple", alpha = 0.6) +
+  scale_x_continuous(breaks = 1:9) +
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.1))) +
+  ggtitle("Variance explained by each principal component")
+```
+
+Based on the plot, the first principal component explains over 60 % of the variance.
