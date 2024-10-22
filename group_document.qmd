@@ -1,51 +1,11 @@
 ---
-title: "Group Document"
+title: "Group 25 Assignment 7"
 format: html
 editor: visual
 ---
 
-## S243036
+## Background
 
-The code below adds two numbers a and b.
+## Load and Clean Data
 
-```{r}
-a <- 3
-b <- 4
-a+b
-```
-
-### New Feature
-
-Very cool new feature, multiplication:
-
-```{r}
-a <- 4
-b <- 29
-a * b
-```
-
-## s194377
-
-## New feature
-
-Testing the document
-
-```{r}
-2+2+2
-```
-
-## s204697
-
-Hallo
-
-```{r}
-5+5
-```
-
-#### New feature
-
-some stuff
-
-```{r}
-10*10
-```
+## Data Analysis
