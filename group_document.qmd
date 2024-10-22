@@ -14,16 +14,24 @@ b <- 4
 a+b
 ```
 
-## s194377
+### New Feature
 
-Hello
-
-Hello
-
-Hello
+Very cool new feature, multiplication:
 
 ```{r}
-2+2 
+a <- 4
+b <- 29
+a * b
+```
+
+## s194377
+
+## New feature
+
+Testing the document
+
+```{r}
+2+2+2
 ```
 
 ## s204697
@@ -34,4 +42,10 @@ Hallo
 5+5
 ```
 
-why is this not working
+#### New feature
+
+some stuff
+
+```{r}
+10*10
+```
