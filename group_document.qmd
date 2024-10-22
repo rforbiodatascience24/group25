@@ -6,6 +6,14 @@ editor: visual
 
 ## S243036
 
+The code below adds two numbers a and b.
+
+```{r}
+a <- 3
+b <- 4
+a+b
+```
+
 ## s194377
 
 ## s204697
