@@ -18,12 +18,16 @@ library(cowplot)
 
 biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 ```
+
 From the biopsy data set we can create a new data set that is appropriate to perform PCA analysis:
+
 ```{r}
 PCA_dataset <- biopsy |> 
   select(-outcome) |> 
   prcomp(scale = TRUE)
 ```
+
+The dataset below consists of all the features present in the biopsy dataset along with all the principal components
 
 ```{r}
 Biopsy_Data_with_PCAcomponents <- PCA_dataset |> 
@@ -31,6 +35,21 @@ Biopsy_Data_with_PCAcomponents <- PCA_dataset |>
   
 ```
 
+We will now add a new binary variable where if the outcome is benign = 0 and if it is malignant = 1
 
+```{r}
+Biopsy_Data_with_PCAcomponents <- Biopsy_Data_with_PCAcomponents |> 
+  mutate(binary_outcome = case_when(
+    outcome == "benign"~0,
+    outcome == "malignant"~1
+  ))
+```
+
+```{r}
+Biopsy_Data_with_PCAcomponents |> 
+  ggplot(aes(.fittedPC1, binary_outcome )) + 
+  geom_point() + 
+  theme_minimal()
+```
 
 ## Data Analysis
